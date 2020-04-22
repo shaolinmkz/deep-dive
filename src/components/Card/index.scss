@@ -1,11 +1,16 @@
 .card-container {
     max-width: 700px;
+    min-width: 300px;
     width: 700px;
     min-width: 300px;
     box-shadow: 0px 0px 5px rgb(226, 226, 226);
     border-radius: 8px;
     padding: 30px 20px;
     margin-top: 20px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 
     h2 {
         font-size: 1.5rem;
@@ -32,17 +37,20 @@
             text-transform: capitalize;
             padding-bottom: 5px; 
             font-weight: bold;
+            padding: 5px;
         }
 
         textarea {
             resize: none;
+            box-shadow: 0px 0px 5px rgb(224, 224, 224);
             border-radius: 8px;
             min-height: 50px;
             height: 100px;
             max-height: 150px;
-            padding: 5px 0;
+            padding: 5px;
             width: 100%;
             font-size: 1.2rem;
+            margin-top: 5px;
         }
     }
 
@@ -57,7 +65,7 @@
         }
         button:hover {
             cursor: pointer;
-            color: goldenrod;
+            color: rgb(32, 113, 218);
             text-decoration: underline;
         }
         button:nth-child(2):hover {

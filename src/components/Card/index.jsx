@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { editPost } from '../../store/actions/postAction';
+import { editPost, deletePost } from '../../store/actions/postAction';
 import { useAppStore } from '../../store/context';
 import './index.scss';
 
@@ -14,13 +14,21 @@ export default ({ userId, id, title, body }) => {
         setModified(prevModified => ({ ...prevModified, [name]: value }))
     }
     const handleSave = () => {
-        setInit(modified);
+        setInit(modified); // accelerate edit prior to when editPost action is finishes
         setIsEdit(false);
         editPost(dispatch, id, modified);
     }
+
     const handleCancel = () => {
         setModified(init);
         setIsEdit(false);
+    }
+
+    const handleDelete = () => {
+        if(window.confirm('Are you sure?')) {
+            dispatch({ type: 'DELETE_POST', payload: { id } }); // accelerate delete prior to when deletePost action is finishes
+            deletePost(dispatch, id);
+        }
     }
 
     return (
@@ -38,6 +46,7 @@ export default ({ userId, id, title, body }) => {
         }
         <div className="button-container">
             <button onClick={isEdit ? handleSave : () => setIsEdit(true)} type="button">{isEdit ? 'Save' : 'Edit'}</button>
+            {!isEdit && (<button onClick={handleDelete} type="button">Delete</button>)}
             {isEdit && <button onClick={handleCancel} type="button">Cancel</button>}
         </div>
     </div>

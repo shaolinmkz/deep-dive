@@ -7,7 +7,6 @@ export default (method = 'get', path = '/posts', requestObject = {}) => {
   })
 }
 
-const { error, log } = console;
-
+// Ignore this line -> Just an error logger being exported for use
+const { error } = console;
 export const errorLogger = error;
-export const Logger = log;

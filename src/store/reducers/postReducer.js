@@ -1,5 +1,10 @@
 import { useReducer } from 'react';
-import { GET_POSTS, EDIT_POSTS } from '../actionTypes/posts';
+import {
+    CREATE_POST,
+    GET_POSTS,
+    EDIT_POSTS,
+    DELETE_POST,
+} from '../actionTypes/posts';
 
 
 const initialState = {
@@ -10,6 +15,11 @@ const postReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
     switch(type) {
+        case CREATE_POST:
+            return {
+                ...state,
+                posts: state.posts.concat(payload),
+            }
         case GET_POSTS:
             return {
                 ...state,
@@ -19,6 +29,11 @@ const postReducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: state.posts.map(post => post.id === payload.id ? payload : post),
+            }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post => post.id !== payload.id),
             }
         default:
             return state;

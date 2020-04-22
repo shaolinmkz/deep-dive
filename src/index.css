@@ -6,6 +6,7 @@
   text-decoration: none;
   box-sizing: border-box;
   font-family: "Dosis", sans-serif;
+  transition: all ease-in-out 0.2s;
 }
 
 html {
@@ -15,4 +16,8 @@ html {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
