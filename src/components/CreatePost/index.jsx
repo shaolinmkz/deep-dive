@@ -11,7 +11,7 @@ export default ({ setModalOpen }) => {
       });
     const [creating, setCreating] = useState(false);
 
-    const { dispatch } = useAppStore().postReducer;
+    const { dispatch, state: { posts } } = useAppStore().postReducer;
     
       const handleChange = ({ target: { name, value } }) => {
         setState(prevState => ({ ...prevState, [name]: value }))
@@ -20,7 +20,7 @@ export default ({ setModalOpen }) => {
       const handleSubmit = (event) => {
             event.preventDefault();
             setCreating(true);
-            const createPromise = createPost(dispatch, state);
+            const createPromise = createPost(dispatch, { ...state, id: posts.length + 1 });
             Promise.all([createPromise])
             .then(() => {
                 setCreating(false);

@@ -11,6 +11,9 @@
 # production
 /build
 
+# add pack-lock
+package-lock.json
+
 # misc
 .DS_Store
 .env.local

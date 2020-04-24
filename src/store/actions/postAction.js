@@ -21,7 +21,7 @@ export const fetchPosts = async (dispatch) => {
 export const createPost = async (dispatch, requestObject) => {
     try {
         const { data: { body, id } } = await http('post','/posts', requestObject);
-        const action = { type: CREATE_POST, payload: { ...body, id } };
+        const action = { type: CREATE_POST, payload: { ...body, id, ...requestObject } };
         dispatch(action);
         return action;
     } catch (error) {
