@@ -20,21 +20,33 @@ After you cloning `cd deep-dive` and run `npm install`
 # Basic Setup
 I will assume you have [NodeJs](https://nodejs.org/en/download) installed on your local machine and you have your preferred [text editor](https://code.visualstudio.com) installed.
 
-* Run the command on your terminal (The Angle brackets are placeHolders)
+* Run the command on your terminal (The Angle brackets are placeHolders) <br />
 
-`npx create-react-app <insert-your-apps-name>`
+```bash
+npx create-react-app <insert-your-apps-name>
+```
 
- **E.g** `npx create-react-app deep-dive`
+ **E.g** <br />
+ 
+ ```bash
+ npx create-react-app deep-dive
+ ```
 
 * When if finished `cd` into the app directory, install `node-sass` and start the app. (The `&&` sign is used to chain series of commands you will like to run)
 
-`cd <app-directory> && npm install node-sass -D && npm install axios && npm start`
+```bash
+cd <app-directory> && npm install node-sass -D && npm install axios && npm start
+```
 
- **E.g** `cd deep-dive && npm install node-sass -D && npm install axios && npm start`
+ **E.g**
+ 
+ ```bash
+ cd deep-dive && npm install node-sass -D && npm install axios && npm start
+ ```
 
 ### Context/index.jsx
 - Create the application context to manage the whole applications state
-```
+```jsx
     import React, { createContext, useContext } from 'react';
     import rootReducer from '../Reducers/rootReducer';
 
@@ -53,7 +65,7 @@ I will assume you have [NodeJs](https://nodejs.org/en/download) installed on you
 
 ### App.js
 - Wrap the app with the App context
-```
+```jsx
     import React from 'react';
     import ReactDOM from 'react-dom';
     import './index.css';
@@ -75,7 +87,7 @@ I will assume you have [NodeJs](https://nodejs.org/en/download) installed on you
 The reducer be structured this way:
 Notice we are exporting a function that returns the `state` and `dispatch` of the `useReducer` hook.
 
-```
+```js
 import { useReducer } from 'react';
 import {
     CREATE_POST,
@@ -131,7 +143,7 @@ export default () => {
 This forms the root reducers, several reducer can be added here.
 Remember you are importing the exported function that returns the state and dispatch of that paticular(postReducer) reducer and then invoking it.
 
-```
+```js
 import postReducer from './postReducer';
 
 export default () => ({
@@ -142,7 +154,7 @@ export default () => ({
 ### actions/postAction.js
 Notice we are parsing a dispatch as an argument which will be acquired from the app-store
 
-```
+```js
 import http, { errorLogger } from '../../http';
 import { GET_POSTS } from '../actionTypes/posts';
 
@@ -163,20 +175,29 @@ export const fetchPosts = async (dispatch) => {
 Notice how the useAppStore hook is used to extract the `state` and `dispatch` from the postReducer
 You can add several reducers to the store and access them this way.
 
-*extracts*
-`const { dispatch, state: { posts } } = useAppStore().postReducer;`
+*extracts* <br />
 
-*Same as above*
-`const { postReducer } = useAppStore();`
-`const { dispatch, state: { posts } } = postReducer;`
-
-*Same as above*
-`const reducerCollection = useAppStore();`
-`const postReducer = reducerCollection.postReducer;`
-`const dispatch = postReducer.dispatch`
-`const posts = postReducer.state.posts;`
-
+```js
+const { dispatch, state: { posts } } = useAppStore().postReducer;
 ```
+
+*Same as above* <br />
+
+```js
+const { postReducer } = useAppStore();
+const { dispatch, state: { posts } } = postReducer;
+```
+
+*Same as above* <br />
+
+```js
+const reducerCollection = useAppStore();
+const postReducer = reducerCollection.postReducer;
+const dispatch = postReducer.dispatch
+const posts = postReducer.state.posts;
+```
+
+```jsx
 import React, { useEffect, useState } from 'react';
 import { fetchPosts } from '../../store/actions/postAction';
 import { useAppStore } from '../../store/context'; // <== import useAppStore hook <==
@@ -220,4 +241,5 @@ export default () => {
     )
 }
 ```
+
 Explore the code base and try buiding an app with the custom App store leveraging on the power of hooks.
